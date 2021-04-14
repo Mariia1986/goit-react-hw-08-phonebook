@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import s from "./Filter.module.css";
 import PropTypes from "prop-types";
-import { filterContacts } from "../../redux/actions/userActions";
-import { filterContact} from '../../redux/selectors'
+import { filterContacts } from "../../redux/contacts/actions/userActions";
+import { filterContact} from '../../redux/contacts/selectors'
 
 class Filter extends Component {
   handleFilter = (e) => {

@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import s from "./ContactForm.module.css";
-import operation from "../../redux/operation";
-import { getContacts } from "../../redux/selectors";
+import operation from "../../redux/contacts/operation";
+import { getContacts } from "../../redux/contacts/selectors";
 
 class ContactForm extends Component {
   state = {

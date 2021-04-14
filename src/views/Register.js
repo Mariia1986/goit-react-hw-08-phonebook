@@ -1,57 +1,74 @@
-import React, {Component} from 'react';
-import Form from 'react-bootstrap/Form';
-
-import FormControl from 'react-bootstrap/FormControl'
-import FormFile from 'react-bootstrap/FormFile'
+import React, { Component } from "react";
+import { Form, Button } from "react-bootstrap";
+import { connect } from "react-redux";
+import operations from '../redux/auth/auth-operations'
 
 class Register extends Component {
-    state = { 
-      userName:'',
-      email:'',
-      password:''
-     }
-    render() { 
-      const {email,password, userName }=this.state
-        return (
+  state = {
+    name: "",
+    email: "",
+    password: "",
+  };
+  handleChange = ({ target: { name, value } }) => {
+    this.setState({ [name]: value });
+  };
 
-            <Form>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="Enter email"
-                name="email"
-                value={email}
-              />
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-              </Form.Text>
-            </Form.Group>
-    
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Password"
-                name="password"
-                value={password}
-              />
-            </Form.Group>
-            <Form.Group controlId="formBasicName">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="name"
-                placeholder="Enter your name"
-                name="name"
-                value={userName}
-              />
-               </Form.Group>
-            <button variant="primary" type="submit">
-             Register
-            </button>
-          </Form>
-          );
-    }
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.register({...this.state})
+    this.setState({ name: "", email: "", password: "" });
+  };
+
+  render() {
+    const { email, password, name } = this.state;
+    return (
+      <Form onSubmit={this.handleSubmit}>
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="Enter email"
+            name="email"
+            value={email}
+            onChange={this.handleChange}
+          />
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+          </Form.Text>
+        </Form.Group>
+
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={password}
+            onChange={this.handleChange}
+          />
+        </Form.Group>
+        <Form.Group controlId="formBasicName">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            type="name"
+            placeholder="Enter your name"
+            name="name"
+            value={name}
+            onChange={this.handleChange}
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Register
+        </Button>
+      </Form>
+    );
+  }
 }
- 
-export default Register;
+
+// const mapStateToProps = (state) => ({});
+
+const mapDispatchToProps = {
+  register:operations.register
+};
+
+export default connect(null, mapDispatchToProps)(Register);

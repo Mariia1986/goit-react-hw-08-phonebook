@@ -1,16 +1,25 @@
 import React, { Component } from "react";
-import Form  from 'react-bootstrap/Form'
-
-import FormControl from 'react-bootstrap/FormControl'
-import FormFile from 'react-bootstrap/FormFile'
+import { Form, Button } from "react-bootstrap";
+import {connect} from 'react-redux'
+import operations from '../redux/auth/auth-operations'
 
 class Login extends Component {
   state = { email: "", password: "" };
+
+  handleChange = ({ target: { name, value } }) => {
+    this.setState({ [name]: value });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.onLogin(this.state)
+    this.setState({ email: "", password: "" });
+  };
+
   render() {
-    const {email,password }=this.state
+    const { email, password } = this.state;
     return (
-     
-      <Form>
+      <Form onSubmit={this.handleSubmit}>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
@@ -18,6 +27,7 @@ class Login extends Component {
             placeholder="Enter email"
             name="email"
             value={email}
+            onChange={this.handleChange}
           />
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
@@ -31,15 +41,20 @@ class Login extends Component {
             placeholder="Password"
             name="password"
             value={password}
+            onChange={this.handleChange}
           />
         </Form.Group>
 
-        <button variant="primary" type="submit">
+        <Button variant="primary" type="submit">
           Login
-        </button>
+        </Button>
       </Form>
     );
   }
 }
 
-export default Login;
+const mapDispathToProps={
+  onLogin:operations.login
+}
+
+export default connect(null, mapDispathToProps)(Login);

@@ -22,8 +22,9 @@ import {
   combineReducers,
   getDefaultMiddleware,
 } from "@reduxjs/toolkit";
-import filterReducer from "./reducers/filterReducer";
-import reducers from "./reducers/contactsReducer";
+import filterReducer from "./contacts/reducers/filterReducer";
+import reducers from "./contacts/reducers/contactsReducer";
+import authReducers from './auth/auth-reducers'
 import logger from "redux-logger";
 import {
   persistStore,
@@ -52,6 +53,7 @@ const contactsReducers = combineReducers({
 
 const rootReducer = combineReducers({
   contacts: contactsReducers,
+  auth:authReducers
 });
 
 const middleware = [

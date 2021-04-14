@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import operation from "../../redux/operation";
+import operation from "../../redux/contacts/operation";
 import ContactList from "./ContactList";
 import PropTypes from "prop-types";
 import {
@@ -7,7 +7,7 @@ import {
   
   getLoading
 
-} from "../../redux/selectors";
+} from "../../redux/contacts/selectors";
 
 const mapStateToProps = (state) => ({
   filteredCont: filteredContacts(state),
