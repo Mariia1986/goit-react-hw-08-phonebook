@@ -11,8 +11,7 @@ import {
   deleteContactsError,
 } from "./actions/userActions.js";
 
-// axios.defaults.baseURL =  'https://goit-phonebook-api.herokuapp.com';
-// axios.defaults.baseURL =  'https://goit-phonebook-api.herokuapp.com';
+
 const fetchContacts = () => async dispatch => {
   dispatch(fetchContactsRequest());
 
@@ -20,7 +19,7 @@ const fetchContacts = () => async dispatch => {
     const { data } = await axios.get('/contacts');
     dispatch(fetchContactsSuccess(data));
   } catch (error) {
-    dispatch(fetchContactsError(error));
+    dispatch(fetchContactsError(error.message));
   }
 };
 
@@ -31,7 +30,7 @@ const addContacts = contact => async dispatch => {
     const { data } = await axios.post('/contacts', contact);
     dispatch(addContactsSuccess(data));
   } catch (error) {
-    dispatch(addContactsError(error));
+    dispatch(addContactsError(error.message));
   }
 };
 
@@ -42,7 +41,7 @@ const deleteContacts = contactId => async dispatch => {
     await axios.delete(`/contacts/${contactId}`);
     dispatch(deleteContactsSuccess(contactId));
   } catch (error) {
-    dispatch(deleteContactsError(error));
+    dispatch(deleteContactsError(error.message));
   }
 };
 

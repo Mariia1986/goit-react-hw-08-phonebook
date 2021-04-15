@@ -17,34 +17,73 @@ import{
 
 axios.defaults.baseURL =  'https://goit-phonebook-api.herokuapp.com';
 
-const token={}
+const token={
+    set(token){
+        axios.defaults.headers.common.Authorization=`Bearer ${token}`
+    },
+    unset(){
+        axios.defaults.headers.common.Authorization=''
+    }
+}
 
 const register=credentials=> async dispatch=>{
-    dispatch(loginRequest())  
+    dispatch(registerRequest())  
   try {
       const {data}=await axios.post('/users/signup', credentials);
-      dispatch(loginSuccess(data))
+      token.set(data.token)
+      dispatch(registerSuccess(data))
+      
     }
       catch(error){
-        dispatch(loginError(error.message))
+        dispatch(registerError(error.message))
       }
 }
 
 const login=credentials=>async dispatch=>{
-    dispatch(registerRequest())  
+    dispatch(loginRequest())  
     try {
         const {data}=await axios.post('/users/login', credentials);
-        dispatch(registerSuccess(data))
+        dispatch(loginSuccess(data))
+        token.set(data.token)
       }
         catch(error){
-          dispatch(registerError(error.message))
+          dispatch(loginError(error.message))
         }
 
 }
 
-const logout=credentials=>dispatch=>{}
+const logout=()=>async dispatch=>{
+    dispatch(logoutRequest())  
+    try {
+       await axios.post('/users/logout');
+       token.unset()
+        dispatch(logoutSuccess())
+        
+      }
+        catch(error){
+          dispatch(logoutError(error.message))
+        }
+}
 
-const getCurrentUser=()=>dispatch=>{}
+const getCurrentUser=()=>async (dispatch, getState)=>{
+    const{
+        auth:{token:persistedToken},
+    }=getState()
+    if(!persistedToken){
+        return
+    }
+    token.set(persistedToken);
+    dispatch(getCurrentUserRequest()) 
+    try {
+        const {data} = await axios.get('/users/current');
+        
+         dispatch(getCurrentUserSuccess(data))
+         
+       }
+         catch(error){
+           dispatch(getCurrentUserError(error.message))
+         }
+}
 
 
 export default{

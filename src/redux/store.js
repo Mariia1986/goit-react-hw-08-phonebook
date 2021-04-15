@@ -25,6 +25,7 @@ import {
 import filterReducer from "./contacts/reducers/filterReducer";
 import reducers from "./contacts/reducers/contactsReducer";
 import authReducers from './auth/auth-reducers'
+import storage from 'redux-persist/lib/storage'
 import logger from "redux-logger";
 import {
   persistStore,
@@ -36,13 +37,13 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-// import storage from "redux-persist/lib/storage";
 
-// const contactsPersistConfig = {
-//   key: "contacts",
-//   storage,
-//   blacklist: ["filter"],
-// };
+
+const authPersistConfig = {
+  key: 'auth',
+  storage,
+  whitelist: ['token'],
+};
 
 const contactsReducers = combineReducers({
   items: reducers.contactsReducer,
@@ -53,7 +54,7 @@ const contactsReducers = combineReducers({
 
 const rootReducer = combineReducers({
   contacts: contactsReducers,
-  auth:authReducers
+  auth: persistReducer(authPersistConfig,authReducers)
 });
 
 const middleware = [
@@ -68,9 +69,9 @@ const middleware = [
 const store = configureStore({
   reducer: rootReducer,
   middleware,
-  // devTools: process.env.NODE_ENV === "development",
+  devTools: process.env.NODE_ENV === "development",
 });
 
-// const persistor = persistStore(store);
+const persistor = persistStore(store);
 
-export default { store };
+export default { store, persistor };
