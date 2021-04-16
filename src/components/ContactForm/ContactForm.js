@@ -34,7 +34,7 @@ class ContactForm extends Component {
       return;
     }
     this.props.addContact(newContact);
-
+     
     this.reset();
   };
 
@@ -84,6 +84,8 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = {
   addContact: operation.addContacts,
+  editCont:operation.editContacts
+
 };
 
 ContactForm.propTypes = {

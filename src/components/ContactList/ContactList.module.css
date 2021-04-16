@@ -18,5 +18,8 @@
     width: 70px;
     height: 25px;
     padding: 0;
+    outline:none;
+    background-color: transparent;
+    border:none;
     /* vertical-align: middle; */
 }

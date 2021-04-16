@@ -17,6 +17,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   deleteCont: (id) => dispatch(operation.deleteContacts(id)),
   fetchCont: () => dispatch(operation.fetchContacts()),
+  editCont:(obj)=>dispatch(operation.editContacts(obj))
 });
 ContactList.propTypes = {
   filteredNames: PropTypes.array,

@@ -64,3 +64,8 @@ export const deleteContactsSuccess = createAction(
 export const deleteContactsError = createAction("contacts/deleteContactsError");
 
 export const filterContacts = createAction("contacts/filter");
+
+
+export const editContactsRequest = createAction("contacts/editContactsRequest");
+export const editContactsSuccess = createAction("contacts/editContactsSuccess");
+export const editContactsError = createAction("contacts/editContactsError");

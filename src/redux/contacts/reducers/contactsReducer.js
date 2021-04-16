@@ -1,6 +1,7 @@
 // import types from "../actions/actionsTypes";
 import { createReducer } from "@reduxjs/toolkit";
-import {fetchContactsRequest,
+import {
+  fetchContactsRequest,
   fetchContactsSuccess,
   fetchContactsError,
   addContactsRequest,
@@ -9,9 +10,10 @@ import {fetchContactsRequest,
   deleteContactsRequest,
   deleteContactsSuccess,
   deleteContactsError,
- 
+  editContactsRequest,
+  editContactsSuccess,
+  editContactsError,
 } from "../actions/userActions.js";
-
 
 // ===========Redux===============
 // const { add, deleteUsers } = types;
@@ -43,28 +45,30 @@ import {fetchContactsRequest,
 //   { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
 // ];
 
-const contactsReducer =  createReducer([], {
-  [fetchContactsSuccess]:(_, { payload }) => payload,
+const contactsReducer = createReducer([], {
+  [fetchContactsSuccess]: (_, { payload }) => payload,
   [addContactsSuccess]: (state, { payload }) => [...state, payload],
   [deleteContactsSuccess]: (state, { payload }) => {
     return state.filter((el) => el.id !== payload);
   },
+  [editContactsSuccess]: (state, { payload }) =>
+    state.map((el) => (el.id === payload.id ? payload : el)),
 });
 
-const loader = createReducer(false,{
-  [fetchContactsRequest]:()=>true,
-  [fetchContactsSuccess]:()=>false,
-  [fetchContactsError]:()=>false,
- [ addContactsRequest]:()=>true,
- [ addContactsSuccess]:()=>false,
- [ addContactsError]:()=>false,
-  [deleteContactsRequest]:()=>true,
- [ deleteContactsSuccess]:()=>false,
- [ deleteContactsError]:()=>false,
+const loader = createReducer(false, {
+  [fetchContactsRequest]: () => true,
+  [fetchContactsSuccess]: () => false,
+  [fetchContactsError]: () => false,
+  [addContactsRequest]: () => true,
+  [addContactsSuccess]: () => false,
+  [addContactsError]: () => false,
+  [deleteContactsRequest]: () => true,
+  [editContactsRequest]: () => true,
+  [editContactsSuccess]: () => false,
+  [editContactsError]: () => false,
+  [deleteContactsSuccess]: () => false,
+  [deleteContactsError]: () => false,
 
+});
 
-})
-
-
-
-export default {contactsReducer, loader};
+export default { contactsReducer, loader };
