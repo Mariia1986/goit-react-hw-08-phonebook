@@ -41,6 +41,7 @@ const error =createReducer(null, {
 })
 
 const isAuth=createReducer(false,{
+    [getCurrentUserRequest]:()=>true,
     [registerSuccess]:()=>true,
     [loginSuccess]:()=>true,
     [getCurrentUserSuccess]:()=>true,

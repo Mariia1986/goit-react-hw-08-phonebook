@@ -21,7 +21,7 @@ class App extends Component {
     return (
       <div className="App">
          <AppBar/>
-        <Suspense fallback={<p>Загружаем...</p>}>
+        <Suspense fallback={<p className='fallback'>Загружаем...</p>}>
         <Switch>
           <PrivateRoute exact path="/" component={Homepage} redirectTo="/login"/>
           <PublicRoute restricted path="/login" redirectTo="/" component={Login}/>

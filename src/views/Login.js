@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Form, Button } from "react-bootstrap";
 import {connect} from 'react-redux'
 import operations from '../redux/auth/auth-operations'
+import s from './views.module.css'
 
 class Login extends Component {
   state = { email: "", password: "" };
@@ -19,7 +20,8 @@ class Login extends Component {
   render() {
     const { email, password } = this.state;
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <div className={s.formContainer}>
+      <Form onSubmit={this.handleSubmit} className={s.form}>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
@@ -28,6 +30,7 @@ class Login extends Component {
             name="email"
             value={email}
             onChange={this.handleChange}
+            className={s.formInput}
           />
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
@@ -42,13 +45,15 @@ class Login extends Component {
             name="password"
             value={password}
             onChange={this.handleChange}
+            className={s.formInput}
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" className={s.formButton}>
           Login
         </Button>
       </Form>
+      </div>
     );
   }
 }

@@ -2,25 +2,15 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { isAuthenticated } from "../../redux/auth/auth-selectors";
+import HomeIcon from '@material-ui/icons/Home';
+import s from "./userMenu.module.css";
 
-const styles = {
-  link: {
-    display: "inline-block",
-    textDecoration: "none",
-    padding: 12,
-    fontWeight: 700,
-    color: "#2A363B",
-  },
-  activeLink: {
-    color: "#E84A5F",
-  },
-};
 
 const Navigation = ({ isAuthenticated }) => (
   <nav>
     {isAuthenticated && (
-      <NavLink to="/" exact style={styles.link} activeStyle={styles.activeLink}>
-        Home
+      <NavLink to="/" exact className={s.link} activeClassName={s.activeLink}>
+        <HomeIcon fontSize="large" />
       </NavLink>
     )}
   </nav>

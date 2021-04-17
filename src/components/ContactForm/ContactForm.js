@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import s from "./ContactForm.module.css";
 import operation from "../../redux/contacts/operation";
 import { getContacts } from "../../redux/contacts/selectors";
+import { Button } from "react-bootstrap";
+
 
 class ContactForm extends Component {
   state = {
@@ -41,6 +43,10 @@ class ContactForm extends Component {
   render() {
     const { name, number } = this.state;
     return (
+      <>
+      <h1 className={s.header}>Phonebook</h1>
+      <div className={s.container}>
+        
       <form className={s.form} onSubmit={this.submitForm}>
         <label htmlFor="name" className={s.label}>
           Name
@@ -72,10 +78,10 @@ class ContactForm extends Component {
             type="tel"
           />
         </label>
-        <button className={s.formButton} type="submit">
-          Add contact
-        </button>
+        <Button className={s.addButton} variant="primary" type="submit">Add contact</Button>
       </form>
+      </div>
+      </>
     );
   }
 }

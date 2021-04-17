@@ -11,7 +11,11 @@ class Filter extends Component {
   };
 
   render() {
-    return (
+    return ( 
+      <>
+    <h2 className={s.filterTitle}>Contacts</h2>
+      <div className={s.filterConteiner}>
+     
       <label className={s.filterLabel}>
         Find contacts by name
         <input
@@ -22,6 +26,8 @@ class Filter extends Component {
           type="text"
         />
       </label>
+      </div>
+      </>
     );
   }
 }

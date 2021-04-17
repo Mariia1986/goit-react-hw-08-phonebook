@@ -3,6 +3,7 @@ import React, {Component} from 'react'
 import {connect} from "react-redux"
 import operation from "../../../redux/contacts/operation";
 import s from "../ContactList.module.css"
+import EditIcon from "@material-ui/icons/Edit";
 
 class EditContactForm extends Component {
     state = {
@@ -61,8 +62,8 @@ class EditContactForm extends Component {
                 type="tel"
               />
             </label>
-            <button className={s.formButton} type="submit">
-              Edit contact
+            <button className={s.contaktListButton} type="submit">
+            <EditIcon color="primary"  />
             </button>
           </form>
         );

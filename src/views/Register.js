@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import operations from '../redux/auth/auth-operations'
+import s from './views.module.css'
 
 class Register extends Component {
   state = {
@@ -22,7 +23,8 @@ class Register extends Component {
   render() {
     const { email, password, name } = this.state;
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <div className={s.formContainer}>
+      <Form onSubmit={this.handleSubmit} className={s.form}> 
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
@@ -31,6 +33,7 @@ class Register extends Component {
             name="email"
             value={email}
             onChange={this.handleChange}
+            className={s.formInput}
           />
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
@@ -45,6 +48,7 @@ class Register extends Component {
             name="password"
             value={password}
             onChange={this.handleChange}
+            className={s.formInput}
           />
         </Form.Group>
         <Form.Group controlId="formBasicName">
@@ -55,12 +59,14 @@ class Register extends Component {
             name="name"
             value={name}
             onChange={this.handleChange}
+            className={s.formInput}
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="primary" className={s.formButton} type="submit">
           Register
         </Button>
       </Form>
+      </div>
     );
   }
 }
